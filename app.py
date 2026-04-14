@@ -54,7 +54,6 @@ NAV_OPTIONS: list[tuple[str, str]] = [
     ("🏠 Home", "home"),
     ("⚡ Prediction", "prediction"),
     ("❄️ Cold Range", "cold_range"),
-    ("✅ Project Guidance", "guidance"),
     ("📊 Insights", "insights"),
     ("ℹ️ About", "about"),
 ]
@@ -488,43 +487,6 @@ hr {
   to { opacity: 1; transform: translateY(0); }
 }
 .card, .result-box, .hero { animation: fadeInUp 240ms ease both; }
-
-/* Guidance page helpers */
-.pill-row {
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-  margin-top: 0.35rem;
-}
-.pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  padding: 0.45rem 0.7rem;
-  border-radius: 999px;
-  border: 1px solid var(--card-border);
-  background: rgba(231, 238, 252, 0.06);
-  color: var(--text-soft);
-  font-size: 0.84rem;
-  font-weight: 600;
-}
-.pill b { color: var(--text-main); font-weight: 800; }
-.callout {
-  border-radius: 16px;
-  padding: 14px 14px;
-  border: 1px solid rgba(0, 212, 255, 0.22);
-  background: linear-gradient(180deg, rgba(0, 212, 255, 0.10), rgba(16, 24, 44, 0.35));
-}
-.callout-warn {
-  border: 1px solid rgba(255, 171, 0, 0.22);
-  background: linear-gradient(180deg, rgba(255, 171, 0, 0.10), rgba(16, 24, 44, 0.35));
-}
-.decision {
-  border: 1px solid rgba(0, 255, 156, 0.22);
-  background: linear-gradient(180deg, rgba(0, 255, 156, 0.10), rgba(16, 24, 44, 0.35));
-}
-.list-tight ul { margin: 0.25rem 0 0 0; padding-left: 1.1rem; }
-.list-tight li { margin: 0.25rem 0; color: var(--text-soft); }
 
 [data-testid="stFileUploader"] {
   background: var(--card-bg);
@@ -1181,82 +1143,6 @@ def page_cold_range() -> None:
     st.markdown("</div>", unsafe_allow_html=True)
 
 
-def page_guidance() -> None:
-    st.markdown("## ✅ Project Guidance")
-    st.caption("A clean, viva-friendly way to present your project title + scope (matching the style in your screenshot).")
-
-    st.markdown(
-        """
-<div class="card">
-  <div class="callout">
-    <div style="font-weight:800;font-size:1.02rem;color:var(--text-main);">👉 Short answer</div>
-    <div style="margin-top:0.2rem;color:var(--text-soft);font-size:0.95rem;">
-      Use the <b>EV Battery State of Health (SOH) Prediction</b> framing as the primary title.
-    </div>
-    <div class="pill-row">
-      <span class="pill">✅ <b>Safer</b> for viva</span>
-      <span class="pill">📚 <b>Academic</b> scope</span>
-      <span class="pill">🧠 <b>ML</b> + explainability</span>
-    </div>
-  </div>
-</div>
-""",
-        unsafe_allow_html=True,
-    )
-
-    st.markdown(
-        """
-<div class="card list-tight">
-  <h3 style="margin-top:0;">✅ Recommended Project Title (Use this)</h3>
-  <div style="font-weight:700;color:var(--text-main);margin-top:0.3rem;">
-    EV Battery State of Health (SOH) Prediction using Machine Learning and Data Analysis
-  </div>
-  <div style="margin-top:0.8rem;font-weight:800;color:var(--text-main);">✔ Why this is correct</div>
-  <ul>
-    <li>Matches your app + report pipeline (training → prediction → insights).</li>
-    <li>Covers <b>Data Science</b>, <b>Machine Learning</b>, and <b>EV Battery analytics</b>.</li>
-    <li>Looks complete and is easy to explain during viva.</li>
-  </ul>
-</div>
-""",
-        unsafe_allow_html=True,
-    )
-
-    st.markdown(
-        """
-<div class="card list-tight">
-  <h3 style="margin-top:0;">⚠ About “Cold Weather Range Degradation Modeler”</h3>
-  <div class="callout callout-warn">
-    <ul>
-      <li>Can be <b>too narrow</b> if your report/app is mainly SOH and cycle-signal based.</li>
-      <li>Examiner may ask deeper electrochemistry/EIS questions (higher risk).</li>
-      <li>Use this title <b>only</b> if your project deliverables are fully centered on cold-temperature range loss + impedance.</li>
-    </ul>
-  </div>
-</div>
-""",
-        unsafe_allow_html=True,
-    )
-
-    st.markdown(
-        """
-<div class="card list-tight">
-  <h3 style="margin-top:0;">💡 Final Decision</h3>
-  <div class="callout decision">
-    <div style="font-weight:800;color:var(--text-main);">Stick with:</div>
-    <div style="margin-top:0.25rem;font-weight:800;font-size:1.05rem;color:var(--text-main);">
-      ✅ SOH Prediction Title (best for marks + safe choice)
-    </div>
-    <div style="margin-top:0.35rem;color:var(--text-soft);font-size:0.92rem;">
-      You can still include a <b>cold-range module</b> as an extra feature/extension (like your ❄️ page) without making it the main title.
-    </div>
-  </div>
-</div>
-""",
-        unsafe_allow_html=True,
-    )
-
-
 def page_insights() -> None:
     schema = get_schema()
     st.markdown("## 📊 Insights")
@@ -1423,8 +1309,6 @@ def main() -> None:
         page_prediction()
     elif page == "cold_range":
         page_cold_range()
-    elif page == "guidance":
-        page_guidance()
     elif page == "insights":
         page_insights()
     elif page == "about":
