@@ -1,0 +1,41 @@
+{
+  "model_version": "0.1.0",
+  "model_type": "XGBoost",
+  "prediction_target": "Range loss (%)",
+  "group_column": "vehicle_id",
+  "n_features": 12,
+  "feature_order": [
+    "ambient_temp_c",
+    "impedance_r0_mohm",
+    "impedance_rct_mohm",
+    "temp_is_subzero",
+    "temp_below_0_c",
+    "temp_below_10_c",
+    "temp_sq",
+    "ln_r0",
+    "ln_rct",
+    "rct_over_r0",
+    "temp_x_r0",
+    "temp_x_rct"
+  ],
+  "raw_input_columns": [
+    "ambient_temp_c",
+    "impedance_r0_mohm",
+    "impedance_rct_mohm"
+  ],
+  "model_path": "model/xgb_cold_range_model.joblib",
+  "dataset_path": "data/cold_weather_range_dataset.csv",
+  "metrics": {
+    "r2": 0.9752251446007582,
+    "mae": 2.061126527030849,
+    "rmse": 2.6787184548669787,
+    "n_train": 36,
+    "n_test": 9,
+    "n_groups_train": 4,
+    "n_groups_test": 1
+  },
+  "notes": [
+    "Provide impedance features in milli-ohms (m\u03a9) and ambient temperature in \u00b0C.",
+    "Target is range loss (%) relative to baseline range at ~20\u00b0C."
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "model_version": "1.0.0",
+  "model_type": "XGBoost",
+  "prediction_target": "SOH (%)",
+  "n_features": 14,
+  "feature_order": [
+    "cycle",
+    "chI",
+    "chV",
+    "chT",
+    "disI",
+    "disV",
+    "disT",
+    "power_ch",
+    "power_dis",
+    "current_abs_ch",
+    "current_abs_dis",
+    "temp_diff",
+    "current_diff",
+    "voltage_diff"
+  ],
+  "raw_input_columns": [
+    "cycle",
+    "chI",
+    "chV",
+    "chT",
+    "disI",
+    "disV",
+    "disT"
+  ],
+  "model_search_paths": [
+    "model/xgb_model.joblib",
+    "xgb_model.joblib",
+    "model/xgb_model.pkl",
+    "xgb_model.pkl"
+  ],
+  "background_csv_paths": [
+    "data/Battery_dataset.csv",
+    "notebooks/Battery_dataset.csv"
+  ],
+  "background_sample_size": 300,
+  "metrics": {
+    "r2": 0.9982867662216716,
+    "mae": 0.48987397724355425,
+    "rmse": 0.6568927966119457,
+    "n_train": 460,
+    "n_test": 220,
+    "n_groups_train": 2,
+    "n_groups_test": 1
+  },
+  "bounds": {
+    "cycle": {
+      "min": 1,
+      "max": 250
+    },
+    "chI": {
+      "min": 1.00085870522847,
+      "max": 1.7475152476787623
+    },
+    "chV": {
+      "min": 4.035077797782369,
+      "max": 4.359233380414973
+    },
+    "chT": {
+      "min": 21.60478430474954,
+      "max": 30.91307693872225
+    },
+    "disI": {
+      "min": 1.702437930831191,
+      "max": 2.411225660445862
+    },
+    "disV": {
+      "min": 2.4848570272679167,
+      "max": 4.363548118478454
+    },
+    "disT": {
+      "min": 26.84845729641802,
+      "max": 38.38872140555414
+    }
+  },
+  "tooltips": {
+    "cycle": "Cycle index since start of life.",
+    "chI": "Charge current (A).",
+    "chV": "Charge voltage (V).",
+    "chT": "Temperature during charge (\u00b0C).",
+    "disI": "Discharge current (A).",
+    "disV": "Discharge voltage (V).",
+    "disT": "Temperature during discharge (\u00b0C)."
+  }
+}

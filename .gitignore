@@ -1,0 +1,23 @@
+.venv/
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+.streamlit/
+
+# Local temp / caches
+.tmp/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Secrets (never commit)
+.env
+*.key
+*.pem
+credentials*.json
