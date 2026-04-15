@@ -145,23 +145,23 @@ def inject_global_css() -> None:
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
 
 :root {
-  /* Premium dark theme (always on) */
+  /* Light theme */
   --accent-blue: #7c3aed;
   --accent-green: #14b8a6;
 
-  --bg-main: radial-gradient(ellipse 110% 70% at 50% -20%, rgba(124, 58, 237, 0.18), transparent 60%),
-    radial-gradient(ellipse 80% 60% at 85% 0%, rgba(20, 184, 166, 0.10), transparent 55%),
-    linear-gradient(180deg, #140f2d 0%, #050814 100%);
-  --bg-sidebar: linear-gradient(180deg, rgba(20, 15, 45, 0.95) 0%, rgba(5, 8, 20, 0.95) 100%);
+  --bg-main: radial-gradient(ellipse 110% 70% at 50% -20%, rgba(124, 58, 237, 0.10), transparent 60%),
+    radial-gradient(ellipse 80% 60% at 85% 0%, rgba(20, 184, 166, 0.08), transparent 55%),
+    linear-gradient(180deg, #f8fafc 0%, #eef2ff 100%);
+  --bg-sidebar: linear-gradient(180deg, rgba(248, 250, 252, 0.95) 0%, rgba(238, 242, 255, 0.95) 100%);
 
-  --text-main: #e7eefc;
-  --text-soft: rgba(231, 238, 252, 0.82);
-  --text-muted: rgba(231, 238, 252, 0.58);
+  --text-main: #0f172a;
+  --text-soft: rgba(15, 23, 42, 0.86);
+  --text-muted: rgba(15, 23, 42, 0.62);
 
-  --card-bg: rgba(16, 24, 44, 0.58);
-  --card-border: rgba(255, 255, 255, 0.08);
-  --card-shadow: 0 18px 60px rgba(0, 0, 0, 0.44);
-  --metric-bg: linear-gradient(145deg, rgba(16, 24, 44, 0.74), rgba(10, 16, 30, 0.78));
+  --card-bg: rgba(255, 255, 255, 0.82);
+  --card-border: rgba(15, 23, 42, 0.12);
+  --card-shadow: 0 12px 36px rgba(15, 23, 42, 0.12);
+  --metric-bg: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(241, 245, 249, 0.92));
 
   --hero-bg: linear-gradient(135deg, rgba(124, 58, 237, 0.28) 0%, rgba(20, 184, 166, 0.18) 45%, rgba(244, 114, 182, 0.12) 100%),
     linear-gradient(135deg, #130f2f 0%, #0e1430 55%, #050814 100%);
@@ -177,9 +177,9 @@ def inject_global_css() -> None:
   --secondary-text: rgba(231, 238, 252, 0.90);
   --secondary-border: rgba(255, 255, 255, 0.10);
 
-  --result-bg: linear-gradient(180deg, rgba(16, 24, 44, 0.86) 0%, rgba(10, 16, 30, 0.88) 100%);
+  --result-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.94) 0%, rgba(241, 245, 249, 0.96) 100%);
   --result-border: rgba(139, 92, 246, 0.32);
-  --result-shadow: 0 24px 80px rgba(0, 0, 0, 0.55);
+  --result-shadow: 0 16px 48px rgba(15, 23, 42, 0.16);
 }
 
 html, body, [class*="css"] {
@@ -620,10 +620,10 @@ hr {
 
 def _apply_plotly_dark(fig) -> None:
     fig.update_layout(
-        template="plotly_dark",
+        template="plotly_white",
         paper_bgcolor="rgba(0,0,0,0)",
         plot_bgcolor="rgba(0,0,0,0)",
-        font=dict(color="#e2e8f0"),
+        font=dict(color="#0f172a"),
     )
 
 
