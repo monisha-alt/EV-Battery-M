@@ -55,7 +55,6 @@ NAV_OPTIONS: list[tuple[str, str]] = [
     ("⚡ Prediction", "prediction"),
     ("❄️ Cold Range", "cold_range"),
     ("📊 Insights", "insights"),
-    ("ℹ️ About", "about"),
 ]
 ID_BY_LABEL = {label: pid for label, pid in NAV_OPTIONS}
 _LABELS = [x[0] for x in NAV_OPTIONS]
@@ -147,13 +146,13 @@ def inject_global_css() -> None:
 
 :root {
   /* Premium dark theme (always on) */
-  --accent-blue: #00D4FF;
-  --accent-green: #00FF9C;
+  --accent-blue: #7c3aed;
+  --accent-green: #14b8a6;
 
-  --bg-main: radial-gradient(ellipse 110% 70% at 50% -20%, rgba(0, 212, 255, 0.16), transparent 60%),
-    radial-gradient(ellipse 80% 60% at 85% 0%, rgba(0, 255, 156, 0.10), transparent 55%),
-    linear-gradient(180deg, #05060a 0%, #0b1220 45%, #05060a 100%);
-  --bg-sidebar: linear-gradient(180deg, rgba(12, 18, 32, 0.95) 0%, rgba(5, 6, 10, 0.95) 100%);
+  --bg-main: radial-gradient(ellipse 110% 70% at 50% -20%, rgba(124, 58, 237, 0.18), transparent 60%),
+    radial-gradient(ellipse 80% 60% at 85% 0%, rgba(20, 184, 166, 0.10), transparent 55%),
+    linear-gradient(180deg, #140f2d 0%, #050814 100%);
+  --bg-sidebar: linear-gradient(180deg, rgba(20, 15, 45, 0.95) 0%, rgba(5, 8, 20, 0.95) 100%);
 
   --text-main: #e7eefc;
   --text-soft: rgba(231, 238, 252, 0.82);
@@ -164,22 +163,22 @@ def inject_global_css() -> None:
   --card-shadow: 0 18px 60px rgba(0, 0, 0, 0.44);
   --metric-bg: linear-gradient(145deg, rgba(16, 24, 44, 0.74), rgba(10, 16, 30, 0.78));
 
-  --hero-bg: linear-gradient(135deg, rgba(0, 212, 255, 0.24) 0%, rgba(0, 255, 156, 0.16) 45%, rgba(124, 58, 237, 0.12) 100%),
-    linear-gradient(135deg, #071026 0%, #0b1220 55%, #05060a 100%);
+  --hero-bg: linear-gradient(135deg, rgba(124, 58, 237, 0.28) 0%, rgba(20, 184, 166, 0.18) 45%, rgba(244, 114, 182, 0.12) 100%),
+    linear-gradient(135deg, #130f2f 0%, #0e1430 55%, #050814 100%);
 
-  --toolbar-bg: rgba(0, 212, 255, 0.08);
-  --toolbar-text: #aeefff;
-  --toolbar-border: rgba(0, 212, 255, 0.18);
+  --toolbar-bg: rgba(124, 58, 237, 0.12);
+  --toolbar-text: #ddd6fe;
+  --toolbar-border: rgba(124, 58, 237, 0.35);
 
-  --primary-bg: linear-gradient(135deg, #00D4FF 0%, #00FF9C 100%);
-  --primary-text: #061018;
+  --primary-bg: linear-gradient(135deg, #8b5cf6 0%, #14b8a6 100%);
+  --primary-text: #f8fafc;
 
   --secondary-bg: rgba(231, 238, 252, 0.06);
   --secondary-text: rgba(231, 238, 252, 0.90);
   --secondary-border: rgba(255, 255, 255, 0.10);
 
   --result-bg: linear-gradient(180deg, rgba(16, 24, 44, 0.86) 0%, rgba(10, 16, 30, 0.88) 100%);
-  --result-border: rgba(0, 212, 255, 0.22);
+  --result-border: rgba(139, 92, 246, 0.32);
   --result-shadow: 0 24px 80px rgba(0, 0, 0, 0.55);
 }
 
@@ -208,6 +207,7 @@ section.main > div {
 [data-testid="stSidebar"] {
   background: var(--bg-sidebar) !important;
   border-right: 1px solid var(--card-border);
+  padding-top: 0.5rem;
 }
 
 [data-testid="stSidebar"] .stRadio label,
@@ -226,6 +226,55 @@ section.main > div {
   margin-bottom: 0.25rem;
 }
 
+.sidebar-brand {
+  border-radius: 16px;
+  border: 1px solid rgba(124, 58, 237, 0.35);
+  background: linear-gradient(145deg, rgba(124, 58, 237, 0.16), rgba(20, 184, 166, 0.10));
+  padding: 12px 12px;
+  margin-bottom: 0.65rem;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.32);
+}
+.sidebar-brand h4 {
+  margin: 0;
+  color: #e9f4ff !important;
+  font-size: 0.95rem;
+  letter-spacing: -0.01em;
+}
+.sidebar-brand p {
+  margin: 0.22rem 0 0 0;
+  color: var(--text-muted) !important;
+  font-size: 0.76rem;
+}
+.sidebar-chip-row {
+  display: flex;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+.sidebar-chip {
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 0.24rem 0.55rem;
+  background: rgba(15, 23, 42, 0.45);
+  color: var(--text-soft) !important;
+  font-size: 0.68rem;
+  font-weight: 700;
+}
+
+[data-testid="stSidebar"] div[role="radiogroup"] > label {
+  border: 1px solid rgba(255, 255, 255, 0.09) !important;
+  background: rgba(15, 23, 42, 0.45) !important;
+  border-radius: 12px !important;
+  padding: 0.5rem 0.62rem !important;
+  margin-bottom: 0.4rem !important;
+  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease !important;
+}
+[data-testid="stSidebar"] div[role="radiogroup"] > label:hover {
+  transform: translateY(-1px);
+  border-color: rgba(124, 58, 237, 0.55) !important;
+  box-shadow: 0 8px 20px rgba(124, 58, 237, 0.16) !important;
+}
+
 .hero {
   background: var(--hero-bg);
   padding: 24px;
@@ -241,9 +290,9 @@ section.main > div {
   content: "";
   position: absolute;
   inset: -40%;
-  background: radial-gradient(circle at 25% 25%, rgba(0, 212, 255, 0.28), transparent 55%),
-    radial-gradient(circle at 75% 15%, rgba(0, 255, 156, 0.18), transparent 50%),
-    radial-gradient(circle at 60% 85%, rgba(124, 58, 237, 0.12), transparent 55%);
+  background: radial-gradient(circle at 25% 25%, rgba(124, 58, 237, 0.30), transparent 55%),
+    radial-gradient(circle at 75% 15%, rgba(20, 184, 166, 0.20), transparent 50%),
+    radial-gradient(circle at 60% 85%, rgba(244, 114, 182, 0.14), transparent 55%);
   filter: blur(12px);
   opacity: 0.75;
   transform: rotate(8deg);
@@ -286,8 +335,8 @@ section.main > div {
 }
 .toolbar-a:hover {
   transform: translateY(-1px);
-  box-shadow: 0 10px 26px rgba(0, 212, 255, 0.10);
-  border-color: rgba(0, 212, 255, 0.35);
+  box-shadow: 0 10px 26px rgba(124, 58, 237, 0.20);
+  border-color: rgba(124, 58, 237, 0.50);
 }
 
 .card {
@@ -434,12 +483,12 @@ button[kind="primary"] {
   background: var(--primary-bg) !important;
   color: var(--primary-text) !important;
   border: none !important;
-  box-shadow: 0 18px 44px rgba(0, 212, 255, 0.12) !important;
+  box-shadow: 0 18px 44px rgba(124, 58, 237, 0.20) !important;
 }
 .stButton > button[kind="primary"]:hover,
 button[kind="primary"]:hover {
   transform: translateY(-1px);
-  box-shadow: 0 22px 56px rgba(0, 255, 156, 0.12) !important;
+  box-shadow: 0 22px 56px rgba(20, 184, 166, 0.22) !important;
   filter: saturate(1.08);
 }
 .stButton > button[kind="secondary"],
@@ -488,6 +537,75 @@ hr {
 }
 .card, .result-box, .hero { animation: fadeInUp 240ms ease both; }
 
+/* Futuristic cold-range dashboard */
+.cold-title {
+  margin: 0;
+  font-size: 1.9rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text-main);
+}
+.cold-subtitle {
+  margin: 0.2rem 0 0 0;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+.cold-divider {
+  margin-top: 0.8rem;
+  height: 2px;
+  width: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(56, 189, 248, 0.85), rgba(34, 197, 94, 0.75), transparent);
+}
+.hero-prediction {
+  border-radius: 22px;
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.86), rgba(2, 6, 23, 0.9));
+  box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.08), 0 0 46px rgba(56, 189, 248, 0.12), 0 18px 50px rgba(0, 0, 0, 0.45);
+  padding: 28px 24px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero-prediction:after {
+  content: "";
+  position: absolute;
+  inset: -50% auto auto -25%;
+  width: 180%;
+  height: 140%;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.18), transparent 62%);
+  pointer-events: none;
+}
+.hero-kicker {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: 700;
+}
+.hero-loss {
+  margin: 0.5rem 0 0.1rem 0;
+  font-size: 3.2rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+.hero-remaining {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-soft);
+}
+.cold-footnote {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin-top: 0.6rem;
+}
+.card:hover {
+  transform: translateY(-2px);
+  transition: transform 0.2s ease;
+}
+
 [data-testid="stFileUploader"] {
   background: var(--card-bg);
   border: 1px dashed var(--secondary-border);
@@ -525,22 +643,13 @@ def _hero_block(schema: dict) -> None:
 
 
 def render_home_toolbar() -> None:
-    """GitHub + About under hero (Home only)."""
+    """GitHub under hero (Home only)."""
     gh_url = "https://github.com"
-    t1, t2 = st.columns(2)
+    t1 = st.columns(1)[0]
     with t1:
         st.markdown(
             f'<div class="toolbar-row"><a class="toolbar-a" href="{gh_url}" target="_blank" rel="noopener">GitHub</a></div>',
             unsafe_allow_html=True,
-        )
-    with t2:
-        st.button(
-            "ℹ️ About",
-            type="secondary",
-            use_container_width=True,
-            key="hdr_about_home",
-            on_click=_queue_nav,
-            args=("ℹ️ About",),
         )
 
 
@@ -548,7 +657,7 @@ def render_compact_topbar(schema: dict) -> None:
     """Non-home pages: no hero — product line + actions."""
     ver = html.escape(str(schema.get("model_version", "1.0.0")))
     gh_url = "https://github.com"
-    c1, c2, c3 = st.columns([4, 1, 1])
+    c1, c2 = st.columns([5, 1])
     with c1:
         st.caption(f"🔋 EV Battery Intelligence · v{ver}")
     with c2:
@@ -556,19 +665,23 @@ def render_compact_topbar(schema: dict) -> None:
             f'<div class="toolbar-row" style="justify-content:flex-end;"><a class="toolbar-a" href="{gh_url}" target="_blank" rel="noopener">GitHub</a></div>',
             unsafe_allow_html=True,
         )
-    with c3:
-        st.button(
-            "ℹ️ About",
-            type="secondary",
-            use_container_width=True,
-            key="hdr_about_compact",
-            on_click=_queue_nav,
-            args=("ℹ️ About",),
-        )
 
 
 def sidebar_nav() -> str:
-    schema = get_schema()
+    st.sidebar.markdown(
+        """
+<div class="sidebar-brand">
+  <h4>⚡ EV Intelligence Console</h4>
+  <p>Realtime battery analytics dashboard</p>
+  <div class="sidebar-chip-row">
+    <span class="sidebar-chip">AI</span>
+    <span class="sidebar-chip">XGBoost</span>
+    <span class="sidebar-chip">SHAP</span>
+  </div>
+</div>
+""",
+        unsafe_allow_html=True,
+    )
     st.sidebar.markdown('<p class="nav-section-title">Navigation</p>', unsafe_allow_html=True)
     choice = st.sidebar.radio(
         "nav_inner",
@@ -576,10 +689,8 @@ def sidebar_nav() -> str:
         key=NAV_RADIO_KEY,
         label_visibility="collapsed",
     )
-    st.sidebar.markdown("<hr>", unsafe_allow_html=True)
-    st.sidebar.caption("Artifacts")
-    for p in schema.get("model_search_paths", [])[:4]:
-        st.sidebar.caption(f"• `{p}`")
+    st.sidebar.markdown('<p class="nav-section-title" style="margin-top:0.6rem;">Tips</p>', unsafe_allow_html=True)
+    st.sidebar.caption("Use `❄️ Cold Range` for the futuristic predictor view.")
     return ID_BY_LABEL[choice]
 
 
@@ -948,199 +1059,158 @@ def page_prediction() -> None:
 
 
 def page_cold_range() -> None:
-    st.markdown("## ❄️ Cold Weather Range Degradation")
-    st.caption(
-        "Predict **range loss (%)** from **ambient temperature (°C)** and **impedance** features (R0, Rct). "
-        "Use single prediction or batch CSV upload."
-    )
+    st.markdown('<h2 class="cold-title">⚡ EV Cold Weather Range Intelligence</h2>', unsafe_allow_html=True)
+    st.markdown('<p class="cold-subtitle">AI-powered battery performance insights</p>', unsafe_allow_html=True)
+    st.markdown('<div class="cold-divider"></div>', unsafe_allow_html=True)
 
     try:
-        cold_schema = load_cold_range_schema()
         cold_model = get_cached_cold_range_model()
     except FileNotFoundError as e:
         st.error(str(e))
         st.info("Train the model first with `python train_cold_range.py`.")
         return
 
-    st.markdown("### 🔹 Single run")
-    left, right = st.columns([2, 1], gap="large")
+    if "cold_soc_pct" not in st.session_state:
+        st.session_state["cold_soc_pct"] = 80
+    if "cold_speed_kph" not in st.session_state:
+        st.session_state["cold_speed_kph"] = 65
+    if "cold_ambient_temp_c" not in st.session_state:
+        st.session_state["cold_ambient_temp_c"] = -10
+    if "cold_resistance_mohm" not in st.session_state:
+        st.session_state["cold_resistance_mohm"] = 72
 
-    with left:
+    left_col, right_col = st.columns([1, 1.7], gap="large")
+    with left_col:
         st.markdown('<div class="card">', unsafe_allow_html=True)
-        st.markdown("#### ❄️ Inputs")
-        st.caption("Tip: click an example preset, then run a prediction.")
-
-        p1, p2, p3 = st.columns(3, gap="small")
-        with p1:
-            if st.button("Mild (0°C)", use_container_width=True, key="cold_preset_0c"):
-                st.session_state["cold_ambient_temp_c"] = 0
-                st.session_state["cold_r0"] = 55.0
-                st.session_state["cold_rct"] = 115.0
-        with p2:
-            if st.button("Cold (-10°C)", use_container_width=True, key="cold_preset_m10c"):
-                st.session_state["cold_ambient_temp_c"] = -10
-                st.session_state["cold_r0"] = 72.0
-                st.session_state["cold_rct"] = 160.0
-        with p3:
-            if st.button("Extreme (-30°C)", use_container_width=True, key="cold_preset_m30c"):
-                st.session_state["cold_ambient_temp_c"] = -30
-                st.session_state["cold_r0"] = 115.0
-                st.session_state["cold_rct"] = 280.0
-
-        st.write("")
-        c1, c2 = st.columns(2, gap="large")
-        with c1:
-            t = st.slider(
-                "Ambient temperature (°C)",
-                -50,
-                30,
-                -10,
-                1,
-                key="cold_ambient_temp_c",
-                help="Outside air temperature near the pack. Include sub-zero conditions for cold-weather behavior.",
-            )
-            r0 = st.number_input(
-                "Impedance R0 (mΩ)",
-                min_value=0.0,
-                value=60.0,
-                step=1.0,
-                key="cold_r0",
-                help="Ohmic resistance term (mΩ). Typically increases as temperature decreases.",
-            )
-        with c2:
-            rct = st.number_input(
-                "Impedance Rct (mΩ)",
-                min_value=0.0,
-                value=140.0,
-                step=1.0,
-                key="cold_rct",
-                help="Charge-transfer resistance (mΩ). Strongly temperature-dependent in cold weather.",
-            )
-
-        raw = {
-            "ambient_temp_c": float(t),
-            "impedance_r0_mohm": float(r0),
-            "impedance_rct_mohm": float(rct),
-        }
-
-        # Inline validation (friendly UX).
-        if raw["impedance_rct_mohm"] < raw["impedance_r0_mohm"]:
-            st.warning("Rct is lower than R0 — double-check units/measurement (this can be valid but uncommon).")
-
-        run = st.button("❄️ Predict range loss", type="primary", use_container_width=True, key="cold_predict_main")
-        if run:
-            try:
-                with st.spinner("Predicting range degradation..."):
-                    X = align_feature_frame(cold_model, build_cold_range_features(raw))
-                    preds, metas = safe_predict(cold_model, X)
-                    loss = float(preds[0])
-                    pm = metas[0]
-
-                    st.session_state["cold_last_input_df"] = X
-                    st.session_state["cold_last_prediction"] = loss
-                    st.session_state["cold_last_pred_note"] = pm.note
-            except Exception as e:  # pragma: no cover
-                st.error("Prediction failed.")
-                st.exception(e)
+        st.markdown("### 🎛️ Input Controls")
+        temp_c = st.slider("🌡️ Temperature (°C)", -40, 20, key="cold_ambient_temp_c")
+        soc_pct = st.slider("🔋 SOC (%)", 10, 100, key="cold_soc_pct")
+        r0 = st.slider("⚙️ Resistance (mΩ)", 30, 180, key="cold_resistance_mohm")
+        speed_kph = st.slider("🚗 Speed (km/h)", 20, 130, key="cold_speed_kph")
+        st.caption("Rct is estimated automatically from temperature + resistance trend.")
+        if st.button("⚡ Run AI Prediction", type="primary", use_container_width=True, key="cold_predict_main"):
+            st.session_state["cold_do_predict"] = True
         st.markdown("</div>", unsafe_allow_html=True)
 
-    with right:
-        st.markdown('<div class="card">', unsafe_allow_html=True)
-        st.markdown("#### ❄️ Result")
-        if "cold_last_prediction" in st.session_state:
-            loss = float(st.session_state["cold_last_prediction"])
-            note_pm = st.session_state.get("cold_last_pred_note", "")
+    rct = float(r0) * (2.0 + max(0.0, -float(temp_c)) / 42.0)
+    raw = {
+        "ambient_temp_c": float(temp_c),
+        "impedance_r0_mohm": float(r0),
+        "impedance_rct_mohm": float(rct),
+    }
+    if st.session_state.get("cold_do_predict", True):
+        with st.spinner("Running AI inference..."):
+            X = align_feature_frame(cold_model, build_cold_range_features(raw))
+            preds, metas = safe_predict(cold_model, X)
+            st.session_state["cold_last_prediction"] = float(preds[0])
+            st.session_state["cold_last_pred_note"] = metas[0].note
+            st.session_state["cold_last_input_df"] = X
+            st.session_state["cold_do_predict"] = False
 
-            # Simple status buckets for presentation.
-            if loss <= 10:
-                label, color = "Low loss", "#22c55e"
-            elif loss <= 30:
-                label, color = "Moderate loss", "#f59e0b"
-            else:
-                label, color = "High loss", "#ef4444"
+    loss = float(st.session_state.get("cold_last_prediction", 0.0))
+    note_pm = st.session_state.get("cold_last_pred_note", "")
+    nominal_range_km = 430.0
+    speed_factor = float(np.clip(1.0 - max(0.0, speed_kph - 70) * 0.0035, 0.72, 1.03))
+    remaining_range_km = nominal_range_km * (soc_pct / 100.0) * (1.0 - loss / 100.0) * speed_factor
 
-            st.markdown(
-                f"""
-<div class="result-box">
-  <h3>🚗 Predicted range loss</h3>
-  <h1 style="font-size:48px;line-height:1.1;">{loss:.2f}%</h1>
-  <p class="metric-unit">relative to baseline range</p>
-  <div class="result-meta">
-    <span class="result-pill"><span class="status-dot" style="background:{color};"></span>{label}</span>
-  </div>
+    if loss <= 15:
+        severity_label, severity_color = "LOW LOSS", "#22c55e"
+    elif loss <= 35:
+        severity_label, severity_color = "MODERATE LOSS", "#f59e0b"
+    else:
+        severity_label, severity_color = "HIGH LOSS", "#ef4444"
+
+    st.markdown(
+        f"""
+<div class="hero-prediction">
+  <div class="hero-kicker">{severity_label}</div>
+  <div class="hero-loss" style="color:{severity_color};">Predicted Range Loss: {loss:.1f}%</div>
+  <p class="hero-remaining">Remaining Range: {remaining_range_km:.0f} km</p>
 </div>
 """,
-                unsafe_allow_html=True,
+        unsafe_allow_html=True,
+    )
+    if note_pm:
+        st.caption(f"⚠ {note_pm}")
+
+    with right_col:
+        c1, c2 = st.columns(2, gap="large")
+        with c1:
+            st.markdown('<div class="card">', unsafe_allow_html=True)
+            st.markdown("#### 📉 Temperature vs Range Loss")
+            temp_sweep = np.arange(-40, 21, 5, dtype=float)
+            rct_sweep = float(r0) * (2.0 + np.maximum(0.0, -temp_sweep) / 42.0)
+            sweep_df = pd.DataFrame(
+                {
+                    "ambient_temp_c": temp_sweep,
+                    "impedance_r0_mohm": float(r0),
+                    "impedance_rct_mohm": rct_sweep,
+                }
             )
-            if note_pm:
-                st.caption(f"⚠ {note_pm}")
-            st.write("")
-            st.markdown('<div class="card card--tight">', unsafe_allow_html=True)
-            m = cold_schema.get("metrics", {})
-            st.markdown("**Model snapshot**")
-            st.caption(
-                f"v{cold_schema.get('model_version','—')} · "
-                f"R² {float(m.get('r2', 0.0)):.3f} · "
-                f"MAE {float(m.get('mae', 0.0)):.2f}%"
+            X_sweep = align_feature_frame(cold_model, build_cold_range_features(sweep_df))
+            y_sweep, _ = safe_predict(cold_model, X_sweep)
+            fig_temp = px.line(
+                x=temp_sweep,
+                y=y_sweep,
+                labels={"x": "Temperature (°C)", "y": "Range loss (%)"},
+                markers=True,
+                color_discrete_sequence=["#38bdf8"],
             )
+            fig_temp.update_layout(height=320, margin=dict(l=10, r=10, t=30, b=10))
+            _apply_plotly_dark(fig_temp)
+            st.plotly_chart(fig_temp, use_container_width=True)
             st.markdown("</div>", unsafe_allow_html=True)
-        else:
-            st.info("Enter inputs and run **Predict range loss** to see results here.")
-        st.markdown("</div>", unsafe_allow_html=True)
 
-    st.markdown("### 🔹 Batch")
-    st.markdown('<div class="card">', unsafe_allow_html=True)
-    st.subheader("📁 Batch prediction (cold range)")
-    st.caption(f"Required columns: {', '.join(RAW_COLUMNS_COLD_RANGE)}")
-    up = st.file_uploader("Upload CSV/TSV with cold-range inputs", type=["csv", "tsv"], key="cold_batch_csv")
-    if up is not None:
-        try:
-            df_raw = pd.read_csv(up, sep=None, engine="python")
-            st.markdown("##### Preview")
-            st.dataframe(df_raw.head(10), use_container_width=True)
-
-            miss = set(RAW_COLUMNS_COLD_RANGE) - set(df_raw.columns)
-            if miss:
-                st.error(f"Missing required columns: {sorted(miss)}")
+        with c2:
+            st.markdown('<div class="card">', unsafe_allow_html=True)
+            st.markdown("#### 🧠 Feature Importance")
+            if hasattr(cold_model, "feature_importances_"):
+                names = list(build_cold_range_features(raw).columns)
+                imp = np.asarray(cold_model.feature_importances_, dtype=float)
+                imp_df = pd.DataFrame({"Feature": names[: len(imp)], "Importance": imp}).sort_values("Importance", ascending=False)
+                fig_imp = px.bar(
+                    imp_df.head(10),
+                    x="Importance",
+                    y="Feature",
+                    orientation="h",
+                    color_discrete_sequence=["#22c55e"],
+                )
+                fig_imp.update_layout(yaxis={"categoryorder": "total ascending"}, height=320, margin=dict(l=10, r=10, t=30, b=10))
+                _apply_plotly_dark(fig_imp)
+                st.plotly_chart(fig_imp, use_container_width=True)
             else:
-                df_proc = df_raw.copy()
-                for col in RAW_COLUMNS_COLD_RANGE:
-                    df_proc[col] = pd.to_numeric(df_proc[col], errors="coerce")
+                st.info("Model-native feature importance is unavailable.")
+            st.markdown("</div>", unsafe_allow_html=True)
 
-                before_rows = len(df_proc)
-                df_proc = df_proc.dropna(subset=RAW_COLUMNS_COLD_RANGE)
-                dropped = before_rows - len(df_proc)
-                if dropped > 0:
-                    st.warning(f"Dropped {dropped} rows due to missing/non-numeric required columns.")
+    st.markdown("### 🔬 Advanced Insights")
+    st.markdown('<div class="card">', unsafe_allow_html=True)
+    st.markdown("#### Top influencing factors")
+    x_local = st.session_state.get("cold_last_input_df")
+    if x_local is None:
+        x_local = align_feature_frame(cold_model, build_cold_range_features(raw))
 
-                if df_proc.empty:
-                    st.error("No valid rows left after cleaning; please check your file.")
-                else:
-                    with st.spinner("Running batch prediction..."):
-                        Xb = align_feature_frame(cold_model, build_cold_range_features(df_proc[RAW_COLUMNS_COLD_RANGE]))
-                        preds, metas = safe_predict(cold_model, Xb)
-
-                        out = df_proc.copy()
-                        out["Predicted_range_loss_pct"] = preds
-                        out["Notes"] = [m.note for m in metas]
-
-                    st.markdown("##### Results (first 50 rows)")
-                    st.dataframe(out.head(50), use_container_width=True)
-
-                    buf = io.StringIO()
-                    out.to_csv(buf, index=False)
-                    st.download_button(
-                        "⬇️ Download results CSV",
-                        buf.getvalue(),
-                        file_name="cold_range_predictions.csv",
-                        mime="text/csv",
-                    )
-        except Exception as e:
-            st.error("Batch prediction failed.")
-            st.exception(e)
+    if shap is not None:
+        try:
+            explainer = make_tree_explainer(cold_model, x_local)
+            exp = explain_local(explainer, x_local)
+            summary = top_features_from_shap(exp, list(x_local.columns), row_index=0, k=5)
+            st.success(summary)
+            shap_vals = np.abs(exp.values[0]).astype(float)
+            top_idx = np.argsort(shap_vals)[-6:][::-1]
+            top_df = pd.DataFrame(
+                {"Feature": [x_local.columns[i] for i in top_idx], "Influence": [shap_vals[i] for i in top_idx]}
+            )
+            fig_top = px.bar(top_df, x="Influence", y="Feature", orientation="h", color_discrete_sequence=["#38bdf8"])
+            fig_top.update_layout(yaxis={"categoryorder": "total ascending"}, height=320, margin=dict(l=10, r=10, t=20, b=10))
+            _apply_plotly_dark(fig_top)
+            st.plotly_chart(fig_top, use_container_width=True)
+        except Exception:
+            st.info("SHAP is available but local factor extraction failed for this run.")
     else:
-        st.info("Upload a CSV/TSV to run batch predictions.")
+        st.info("Install `shap` to enable local explainability.")
     st.markdown("</div>", unsafe_allow_html=True)
+
+    st.markdown('<p class="cold-footnote">Built with Machine Learning & XGBoost</p>', unsafe_allow_html=True)
 
 
 def page_insights() -> None:
@@ -1258,41 +1328,6 @@ def page_insights() -> None:
         st.markdown("</div>", unsafe_allow_html=True)
 
 
-def page_about() -> None:
-    schema = get_schema()
-    st.markdown("## ℹ️ About")
-    st.caption("Problem scope, data, model artifact, and feature order.")
-
-    st.markdown("### 🔹 Details")
-    mt = html.escape(str(schema.get("model_type", "XGBoost")))
-    blocks: list[tuple[str, str]] = [
-        ("Problem", "Predict <strong>SOH (%)</strong> from charge/discharge signals using a leakage-safe split (grouped by <code>battery_id</code>)."),
-        ("Dataset", "Cycling data with charge/discharge signals; SHAP background sampled from project CSV."),
-        ("Features", "Engineered features from real columns (power, diffs, abs currents) — matching training."),
-        ("🧠 Model", f"<strong>{mt}</strong> · artifact <code>model/xgb_model.joblib</code>."),
-        ("Tools", "Python · Pandas · scikit-learn · XGBoost · SHAP · Plotly · Streamlit"),
-    ]
-    for title, body in blocks:
-        st.markdown(
-            f'<div class="card card--tight"><h3 style="margin-top:0;">{html.escape(title)}</h3>'
-            f'<p style="margin:0;line-height:1.55;font-size:0.92rem;">{body}</p></div>',
-            unsafe_allow_html=True,
-        )
-
-    st.markdown("### 🔹 Artifacts & features")
-    feats = ", ".join(f"<code>{html.escape(c)}</code>" for c in FEATURE_ORDER)
-    st.markdown(
-        f"""
-<div class="card card--tight">
-<h3 style="margin-top:0;">Save path</h3>
-<p style="margin:0 0 0.4rem 0;font-size:0.92rem;"><code>joblib.dump(model, 'model/xgb_model.joblib')</code> — see <code>model/schema.json</code>.</p>
-<p style="margin:0;font-size:0.85rem;opacity:0.85;"><strong>Feature order:</strong> {feats}</p>
-</div>
-""",
-        unsafe_allow_html=True,
-    )
-
-
 def main() -> None:
     # 1) Navigation: apply queued page BEFORE any widget reads NAV_RADIO_KEY
     _apply_pending_nav()
@@ -1311,8 +1346,6 @@ def main() -> None:
         page_cold_range()
     elif page == "insights":
         page_insights()
-    elif page == "about":
-        page_about()
 
 
 if __name__ == "__main__":
